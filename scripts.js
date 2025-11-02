@@ -14,40 +14,62 @@ function Book(title, author, pages, isRead) {
 function addBookToLibrary(title, author, pages, isRead) {
     Book.call(this, title, author, pages, isRead);
     this.id = crypto.randomUUID();
-    myLibrary.push("ID: " + this.id + ", " + this.info());
+    myLibrary.push({ id: this.id, info: this.info() });
+    // console.log(myLibrary)
     displayBook();
+    console.log(myLibrary);
 }
 
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
 
 function displayBook() {
     let newBook = [];
+    let id = "";
     myLibrary.forEach(book => {
-        newBook = book.split(", ").slice(1);
+        newBook = book.info.split(", ");
+        id = book.id;
+        // console.log(newBook);
     })
-    console.log(newBook);
-    console.log(newBook[0].split("by"));
+
     const cardDiv = document.createElement("div");
-    cardDiv.classList.add("card")
+    cardDiv.classList.add("card");
+
     const titleAuthor = newBook[0].split("by");
+
     const title = document.createElement("p");
     title.textContent = titleAuthor[0];
+
     const author = document.createElement("p");
     author.textContent = titleAuthor[1];
+
     const pages = document.createElement("p");
     pages.textContent = newBook[1];
+
     const read = document.createElement("p");
     read.textContent = newBook[2];
 
-    cardDiv.append(title, author, pages, read);
+    const button = document.createElement("button");
+    button.id = id;
+    button.textContent = "Remove";
+
+    button.addEventListener("click", (event) => {
+        // console.log(myLibrary);
+        console.log(event.target.id)
+        console.log(myLibrary.findIndex(book => book.id === event.target.id));
+        let removeId = myLibrary.findIndex(book => book.id === event.target.id);
+        myLibrary.splice(removeId);
+        cardDiv.remove();
+        console.log(myLibrary);
+    })
+
+    cardDiv.append(title, author, pages, read, button);
     container.appendChild(cardDiv);
 }
-
-// displayBook();
-
+// console.log(myLibrary);
 const show = document.querySelector("#addNewBook");
 const dialogBox = document.querySelector("#formDialog");
 const confirm = document.querySelector("#confirmAdd");
+const removeButton = document.querySelector(".removeButton");
 
 show.addEventListener("click", () => {
     dialogBox.showModal();
@@ -66,3 +88,7 @@ confirm.addEventListener("click", (event) => {
     addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, isRead);
     dialogBox.close();
 })
+
+// function removeBook() {
+
+// }
