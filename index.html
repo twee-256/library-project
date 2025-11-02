@@ -31,18 +31,20 @@
             <input type="number" id="pages" name="pages" />
             <fieldset>
                 <legend>Read?</legend>
-                <div>
+                <div class="flex">
                     <input type="radio" id="true" name="read" value="true" />
                     <label for="true">True</label>
                 </div>
 
-                <div>
+                <div class="flex">
                     <input type="radio" id="false" name="read" value="false" />
                     <label for="false">False</label>
                 </div>
             </fieldset>
-            <button value="cancel" formmethod="dialog">Cancel</button>
-            <button id="confirmAdd" value="default">Add book!</button>
+            <div class="buttonSpace">
+                <button value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirmAdd" value="default">Add book!</button>
+            </div>
         </form>
     </dialog>
     <script src="scripts.js"></script>

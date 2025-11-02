@@ -35,6 +35,7 @@ function displayBook() {
 
     const title = document.createElement("p");
     title.textContent = titleAuthor[0];
+    title.style.textAlign = "center";
 
     const author = document.createElement("p");
     author.textContent = titleAuthor[1];
@@ -64,8 +65,10 @@ function displayBook() {
 
     const toggle = document.createElement("button");
     toggle.classList.add("toggle");
-    if (read == true) {
+    if (read.textContent == "Read") {
         toggle.textContent = "Read";
+        toggle.style.backgroundColor = "#ffffff";
+        toggle.style.color = "#4E4C67";
     } else {
         toggle.textContent = "TBR";
     }
