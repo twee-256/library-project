@@ -1,8 +1,64 @@
+body,
+button {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+}
+
+body {
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    box-shadow: 0px 7px 9px rgba(158, 158, 158, 0.318);
+    padding-bottom: 1rem;
+}
+
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 200px));
+    margin: 0 auto;
+    width: 60%;
+    gap: 1rem;
 }
 
 .container>div {
-    border: 1px solid;
+    border: 1px solid #F7F4F3;
+    justify-items: center;
+    padding: 1rem 0rem 1rem 0rem;
+    border-radius: 15px;
+    background-color: #F7F4F3;
+    box-shadow: -2px 5px 1px rgb(196, 194, 194);
+}
+
+.subheader {
+    display: grid;
+    grid-auto-flow: column;
+    width: 60%;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonDiv {
+    display: grid;
+    gap: 10px;
+}
+
+#addNewBook {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    font-size: 1.2em;
+    border-radius: 25px;
+    background-color: #4E4C67;
+    color: #ffffff;
+}
+
+.remove,
+.toggle {
+    border-radius: 15px;
+    padding: 0.5rem;
+    background-color: #4E4C67;
+    color: #ffffff;
 }

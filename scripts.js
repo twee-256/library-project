@@ -15,9 +15,7 @@ function addBookToLibrary(title, author, pages, isRead) {
     Book.call(this, title, author, pages, isRead);
     this.id = crypto.randomUUID();
     myLibrary.push({ id: this.id, info: this.info() });
-    // console.log(myLibrary)
     displayBook();
-    console.log(myLibrary);
 }
 
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
@@ -28,7 +26,6 @@ function displayBook() {
     myLibrary.forEach(book => {
         newBook = book.info.split(", ");
         id = book.id;
-        // console.log(newBook);
     })
 
     const cardDiv = document.createElement("div");
@@ -48,12 +45,15 @@ function displayBook() {
     const read = document.createElement("p");
     read.textContent = newBook[2];
 
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("buttonDiv");
+
     const button = document.createElement("button");
     button.id = id;
+    button.classList.add("remove");
     button.textContent = "Remove";
 
     button.addEventListener("click", (event) => {
-        // console.log(myLibrary);
         console.log(event.target.id)
         console.log(myLibrary.findIndex(book => book.id === event.target.id));
         let removeId = myLibrary.findIndex(book => book.id === event.target.id);
@@ -62,10 +62,29 @@ function displayBook() {
         console.log(myLibrary);
     })
 
-    cardDiv.append(title, author, pages, read, button);
+    const toggle = document.createElement("button");
+    toggle.classList.add("toggle");
+    if (read == true) {
+        toggle.textContent = "Read";
+    } else {
+        toggle.textContent = "TBR";
+    }
+    toggle.addEventListener("click", event => {
+        if (toggle.textContent == "Read") {
+            toggle.textContent = "TBR";
+            toggle.style.backgroundColor = "#4E4C67";
+            toggle.style.color = "#ffffff";
+        } else {
+            toggle.textContent = "Read";
+            toggle.style.backgroundColor = "#ffffff";
+            toggle.style.color = "#4E4C67";
+        }
+    })
+    buttonDiv.append(button, toggle);
+    cardDiv.append(title, author, pages, buttonDiv);
     container.appendChild(cardDiv);
 }
-// console.log(myLibrary);
+
 const show = document.querySelector("#addNewBook");
 const dialogBox = document.querySelector("#formDialog");
 const confirm = document.querySelector("#confirmAdd");
@@ -88,7 +107,3 @@ confirm.addEventListener("click", (event) => {
     addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, isRead);
     dialogBox.close();
 })
-
-// function removeBook() {
-
-// }
